@@ -1249,7 +1249,7 @@ move.chillingWater = {
     type: "water",
     power: 50,
     info: function() {return `Decreases enemy Attack by 50%`},
-    hitEffect: function(target) { moveBuff(target,'atkdown2') },
+    hitEffect: function(target) { moveBuff(target,'atkdown1') },
 }
 
 move.bubbleBeam = {
@@ -2510,7 +2510,7 @@ ability.rivalry = {
 ability.pickPocket = {
     type: [`dark`, `flying`, `normal`],
     rarity: 2,
-    info: function() {return `Doubles the chance of getting a rare item from the area (Can stack)`},
+    info: function() {return `Increases the chance of getting a rare item from the area by 50%(Can stack)`},
 }
 
 ability.guts = {

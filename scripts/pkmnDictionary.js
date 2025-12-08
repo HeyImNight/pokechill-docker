@@ -519,6 +519,20 @@ pkmn.ninetales = {
 }
 
 // 033 Jigglypuff → Wigglytuff
+
+pkmn.igglybuff = {
+    type: ["normal","fairy"],
+    bst: {
+        hp: 90,
+        atk: 30,
+        def: 15,
+        satk: 40,
+        sdef: 20,
+        spe: 15,
+    },
+    evolve: function() { return { 1: { pkmn: pkmn.jigglypuff, friendship: true } } }, // evoluciona con amistad
+}
+
 pkmn.jigglypuff = {
     type: ["normal","fairy"],
     bst: {
@@ -986,7 +1000,7 @@ pkmn.kadabra = {
         sdef: 70,
         spe: 105,
     },
-    evolve: function() { return { 1: { pkmn: pkmn.alakazam, trade: true } } },
+    evolve: function() { return { 1: { pkmn: pkmn.alakazam, item: item.linkStone } } },
 }
 
 pkmn.alakazam = {
@@ -1025,7 +1039,7 @@ pkmn.machoke = {
         sdef: 60,
         spe: 45,
     },
-    evolve: function() { return { 1: { pkmn: pkmn.machamp, trade: true } } },
+    evolve: function() { return { 1: { pkmn: pkmn.machamp, item: item.linkStone } } },
 }
 
 pkmn.machamp = {
@@ -1183,7 +1197,7 @@ pkmn.graveler = {
         sdef: 45,
         spe: 35,
     },
-    evolve: function() { return { 1: { pkmn: pkmn.golem, trade: true } } },
+    evolve: function() { return { 1: { pkmn: pkmn.golem, item: item.linkStone } } },
 }
 
 pkmn.golem = {
@@ -1515,7 +1529,7 @@ pkmn.haunter = {
         sdef: 55,
         spe: 95,
     },
-    evolve: function() { return { 1: { pkmn: pkmn.gengar, trade: true } } },
+    evolve: function() { return { 1: { pkmn: pkmn.gengar, item: item.linkStone } } },
 }
 
 pkmn.gengar = {
@@ -2196,6 +2210,66 @@ pkmn.dragonair = {
     evolve: function() { return { 1: { pkmn: pkmn.dragonite, level: evolutionLevel3 } } },
 }
 
+pkmn.articuno = {
+    type: ["ice","flying"],
+    bst: {
+        hp: 90,
+        atk: 85,
+        def: 100,
+        satk: 95,
+        sdef: 125,
+        spe: 85,
+    }
+}
+
+pkmn.zapdos = {
+    type: ["electric","flying"],
+    bst: {
+        hp: 90,
+        atk: 90,
+        def: 85,
+        satk: 125,
+        sdef: 90,
+        spe: 100,
+    }
+}
+
+pkmn.moltres = {
+    type: ["fire","flying"],
+    bst: {
+        hp: 90,
+        atk: 100,
+        def: 90,
+        satk: 125,
+        sdef: 85,
+        spe: 90,
+    }
+}
+
+pkmn.mew = {
+    type: ["psychic"],
+    bst: {
+        hp: 100,
+        atk: 100,
+        def: 100,
+        satk: 100,
+        sdef: 100,
+        spe: 100,
+    }
+}
+
+pkmn.mewtwo = {
+    type: ["psychic"],
+    bst: {
+        hp: 106,
+        atk: 110,
+        def: 90,
+        satk: 154,
+        sdef: 90,
+        spe: 130,
+    }
+}
+
 pkmn.dragonite = {
     type: ["dragon","flying"],
     bst: {
@@ -2638,7 +2712,7 @@ pkmn.aipom = {
         sdef: 55,
         spe: 85,
     },
-    evolve: function() { return { 1: { pkmn: pkmn.ambipom, trade: true, item: item.heldItem } } },
+    evolve: function() { return { 1: { pkmn: pkmn.ambipom, level: evolutionLevel2 } } },
 }
 
 pkmn.ambipom = {
@@ -3080,6 +3154,20 @@ pkmn.unownQuestion = {
     }
 }
 // 202 Wobbuffet
+
+pkmn.wynaut = {
+    type: ["psychic"],
+    bst: {
+        hp: 95,
+        atk: 23,
+        def: 48,
+        satk: 23,
+        sdef: 48,
+        spe: 23,
+    },
+    evolve: function() { return { 1: { pkmn: pkmn.wobbuffet, level: evolutionLevel2 } } },
+}
+
 pkmn.wobbuffet = {
     type: ["psychic"],
     bst: {
@@ -3667,6 +3755,30 @@ pkmn.suicune = {
         satk: 90,
         sdef: 115,
         spe: 85,
+    }
+}
+
+pkmn.seviper = {
+    type: ["poison"],
+    bst: {
+        hp: 73,
+        atk: 100,
+        def: 60,
+        satk: 100,
+        sdef: 60,
+        spe: 65,
+    }
+}
+
+pkmn.zangoose = {
+    type: ["normal"],
+    bst: {
+        hp: 73,
+        atk: 115,
+        def: 60,
+        satk: 60,
+        sdef: 60,
+        spe: 90,
     }
 }
 
@@ -4902,7 +5014,30 @@ pkmn.solrock = {
     }
 }
 
+pkmn.lileep = {
+    type: ["rock","grass"],
+    bst: {
+        hp: 66,
+        atk: 41,
+        def: 77,
+        satk: 61,
+        sdef: 87,
+        spe: 23,
+    },
+    evolve: function() { return { 1: { pkmn: pkmn.cradily, level: evolutionLevel3 } } },
+}
 
+pkmn.cradily = {
+    type: ["rock","grass"],
+    bst: {
+        hp: 86,
+        atk: 81,
+        def: 97,
+        satk: 81,
+        sdef: 107,
+        spe: 43,
+    }
+}
 
 // 342 Baltoy → Claydol
 pkmn.baltoy = {
@@ -5022,7 +5157,7 @@ pkmn.chingling = {
         sdef: 50,
         spe: 45,
     },
-    evolve: function() { return { 1: { pkmn: pkmn.chimecho, level: 0, friendship: true } } }, // evoluciona con amistad
+    evolve: function() { return { 1: { pkmn: pkmn.chimecho, friendship: true } } }, // evoluciona con amistad
 }
 
 pkmn.chimecho = {
@@ -5739,7 +5874,7 @@ pkmn.combee = {
         sdef: 42,
         spe: 70,
     },
-    evolve: function() { return { 1: { pkmn: pkmn.vespiquen, gender: "female" } } },
+    evolve: function() { return { 1: { pkmn: pkmn.vespiquen, level: evolutionLevel2 } } },
 }
 
 pkmn.vespiquen = {
@@ -6127,7 +6262,7 @@ pkmn.riolu = {
         sdef: 40,
         spe: 60,
     },
-    evolve: function() { return { 1: { pkmn: pkmn.lucario, level: 0, friendship: true } } }, // evoluciona con amistad
+    evolve: function() { return { 1: { pkmn: pkmn.lucario,friendship: true } } }, // evoluciona con amistad
 }
 
 pkmn.lucario = {
@@ -6300,6 +6435,33 @@ pkmn.abomasnow = {
 
 
 // 468 Togekiss
+
+pkmn.togepi = {
+    type: ["fairy"],
+    bst: {
+        hp: 35,
+        atk: 20,
+        def: 65,
+        satk: 40,
+        sdef: 65,
+        spe: 20,
+    },
+    evolve: function() { return { 1: { pkmn: pkmn.togetic, friendship: true } } }, // evoluciona con amistad
+}
+
+pkmn.togetic = {
+    type: ["fairy","flying"],
+    bst: {
+        hp: 55,
+        atk: 40,
+        def: 85,
+        satk: 80,
+        sdef: 105,
+        spe: 40,
+    },
+  evolve: function() { return { 1: { pkmn: pkmn.togekiss, item: item.shinyStone /*o equivalente*/ } } },
+}
+
 pkmn.togekiss = {
     type: ["fairy","flying"],
     bst: {
@@ -7869,7 +8031,7 @@ pkmn.karrablast = {
     sdef: 45,
     spe: 60,
   },
-  evolve: function() { return { 1: { pkmn: pkmn.escavalier, trade: true } } },
+  evolve: function() { return { 1: { pkmn: pkmn.escavalier, item: item.linkStone } } },
 }
 
 pkmn.escavalier = {
@@ -8233,7 +8395,7 @@ pkmn.shelmet = {
     sdef: 65,
     spe: 25,
   },
-  evolve: function() { return { 1: { pkmn: pkmn.accelgor, trade: true/*tradición de intercambio con Karrablast*/ } } },
+  evolve: function() { return { 1: { pkmn: pkmn.accelgor, item: item.linkStone } } },
 }
 
 pkmn.accelgor = {

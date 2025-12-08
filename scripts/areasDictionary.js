@@ -8,7 +8,7 @@ const areas = {}
 //area 4 rs = pseudo-legendary
 
 
-const rotationWildMax = 6;
+const rotationWildMax = 8;
 
 const wildAreaLevel1 = 10
 const wildAreaLevel2 = 30
@@ -21,7 +21,7 @@ const wildRareItemsWater = [item.mysticWater, item.passhoBerry]
 const wildRareItemsElectric = [item.magnet, item.wacanBerry]
 const wildRareItemsGrass = [item.miracleSeed, item.rindoBerry]
 const wildRareItemsIce = [item.neverMeltIce, item.yacheBerry]
-const wildRareItemsFighting = [item.sharpBeak, item.chopleBerry]
+const wildRareItemsFighting = [item.blackBelt, item.chopleBerry]
 const wildRareItemsPoison = [item.poisonBarb, item.kebiaBerry]
 const wildRareItemsGround = [item.softSand, item.shucaBerry]
 const wildRareItemsFlying = [item.sharpBeak, item.cobaBerry]
@@ -454,7 +454,145 @@ areas.skyHigh = {
     }
 }
 
+//rotation 7
+areas.dankCave = {
+    rotation : 7,
+    level : wildAreaLevel1,
+    type: `wild`,
+    background : `cave`,
+    icon: pkmn.seviper,
+    spawns: {
+        common : [pkmn.zubat,pkmn.alolanRattata, pkmn.alolanMeowth],
+        uncommon : [pkmn.seviper],
+        rare : [pkmn.sneasel]
+    },
+    drops: {
+        common : [item.mysteryEgg],
+        rare : wildRareItemsDark
+    }
+}
 
+
+areas.forestShrine = {
+    rotation : 7,
+    level : wildAreaLevel2,
+    type: `wild`,
+    background : `forest`,
+    icon: pkmn.chingling,
+    spawns: {
+        common : [pkmn.chingling,pkmn.solrock, pkmn.lunatone],
+        uncommon : [pkmn.girafarig],
+        rare : [pkmn.ralts]
+    },
+    drops: {
+        common : [item.mysteryEgg],
+        rare : wildRareItemsPsychic
+    }
+}
+
+areas.streetCircus = {
+    rotation : 7,
+    level : wildAreaLevel3,
+    type: `wild`,
+    background : `town`,
+    icon: pkmn.popplio,
+    spawns: {
+        common : [pkmn.mimejr,pkmn.wynaut, pkmn.igglybuff],
+        uncommon : [pkmn.togepi],
+        rare : [pkmn.popplio]
+    },
+    drops: {
+        common : [item.mysteryEgg],
+        rare : wildRareItemsFairy
+    }
+}
+
+areas.weaponsFacility = {
+    rotation : 7,
+    level : wildAreaLevel4,
+    type: `wild`,
+    background : `lab`,
+    icon: pkmn.honedge,
+    spawns: {
+        common : [pkmn.kabuto,pkmn.koffing, pkmn.honedge],
+        uncommon : [pkmn.ditto],
+        rare : [pkmn.dreepy]
+    },
+    drops: {
+        common : [item.mysteryEgg],
+        rare : wildRareItemsSteel
+    }
+}
+
+//rotation 8
+areas.scorchingBadlands = {
+    rotation : 8,
+    level : wildAreaLevel1,
+    type: `wild`,
+    background : `desert`,
+    icon: pkmn.hippopotas,
+    spawns: {
+        common : [pkmn.hippopotas,pkmn.sandile, pkmn.scraggy],
+        uncommon : [pkmn.archen],
+        rare : [pkmn.larvesta]
+    },
+    drops: {
+        common : [item.mysteryEgg],
+        rare : wildRareItemsGround
+    }
+}
+
+
+areas.lavaLake = {
+    rotation : 8,
+    level : wildAreaLevel2,
+    type: `wild`,
+    background : `volcano`,
+    icon: pkmn.sizzlipede,
+    spawns: {
+        common : [pkmn.slugma,pkmn.sizzlipede, pkmn.houndour],
+        uncommon : [pkmn.magby],
+        rare : [pkmn.camerupt]
+    },
+    drops: {
+        common : [item.mysteryEgg],
+        rare : wildRareItemsFire
+    }
+}
+
+areas.crashingSeaside = {
+    rotation : 8,
+    level : wildAreaLevel3,
+    type: `wild`,
+    background : `beach`,
+    icon: pkmn.frillish,
+    spawns: {
+        common : [pkmn.bruxish,pkmn.mareanie, pkmn.frillish],
+        uncommon : [pkmn.skrelp],
+        rare : [pkmn.mudkip]
+    },
+    drops: {
+        common : [item.mysteryEgg],
+        rare : wildRareItemsWater
+    }
+}
+
+areas.strangeSpace = {
+    rotation : 8,
+    level : wildAreaLevel4,
+    type: `wild`,
+    background : `space`,
+    icon: pkmn.hatenna,
+    spawns: {
+        common : [pkmn.elgyem,pkmn.cleffa, pkmn.lileep],
+        uncommon : [pkmn.hatenna],
+        rare : [pkmn.goomy]
+    },
+    drops: {
+        common : [item.mysteryEgg],
+        rare : wildRareItemsDragon
+    }
+}
 
 
 /*
@@ -537,7 +675,7 @@ areas.sinnohUndergroundI = {
     },
     drops: {
         common : [item.nothing],
-        rare : [item.waterStone, item.thunderStone, item.sunStone]
+        rare : [item.waterStone, item.thunderStone, item.sunStone, item.linkStone]
     },
 }
 
@@ -816,6 +954,120 @@ areas.alphaRuins = {
     drops: {
         common : [item.mysteryEgg],
     },
+}
+
+areas.thunderSummit = {
+    rotation: 1,
+    type: `event`,
+    background : `mountain`,
+    level : 90,
+    icon: pkmn.luxray,
+    uncatchable: true,
+    unlockDescription : `🔒 Defeat Elite Trainer Cynthia in VS to unlock`,
+    unlockRequirement : function() { return areas.vsEliteTrainerCynthia.defeated },
+    spawns: {
+        common : [pkmn.luxray,pkmn.alolanGolem,pkmn.electivire,pkmn.boltund],
+    },
+    drops: {
+        common : [item.nothing],
+        uncommon : [item.thunderousRock]
+    },
+}
+
+areas.eventZapdos = {
+    rotation: 1,
+    type: `event`,
+    name: `Zapdos Lair`,
+    background : `cave`,
+    icon: pkmn.zapdos,
+    trainer: true,
+    encounter: true,
+    difficulty: 25,
+    encounterEffect : function() {item.thunderousRock.got--},
+    unlockDescription : `🔒 Requires a <img src="img/items/thunderousRock.png"> Thunderous Rock to enter`,
+    unlockRequirement : function() { return item.thunderousRock.got>0 },
+    level : 90,
+    team : {
+        slot1 : pkmn.zapdos,
+        slot1Moves : [move.thunderbolt.id,move.discharge.id, move.hurricane.id, move.fly.id],
+    },
+    reward : [pkmn.zapdos]
+}
+
+areas.articSummit = {
+    rotation: 1,
+    type: `event`,
+    background : `snow`,
+    uncatchable: true,
+    unlockDescription : `🔒 Defeat Elite Trainer Cynthia in VS to unlock`,
+    unlockRequirement : function() { return areas.vsEliteTrainerCynthia.defeated },
+    level : 90,
+    icon: pkmn.beartic,
+    spawns: {
+        common : [pkmn.beartic,pkmn.avalugg,pkmn.walrein,pkmn.vanilluxe],
+    },
+    drops: {
+        common : [item.nothing],
+        uncommon : [item.articRock]
+    },
+}
+
+areas.eventArticuno = {
+    rotation: 1,
+    type: `event`,
+    name: `Articuno Den`,
+    background : `cave`,
+    icon: pkmn.articuno,
+    trainer: true,
+    encounter: true,
+    difficulty: 25,
+    encounterEffect : function() {item.articRock.got--},
+    unlockDescription : `🔒 Requires a <img src="img/items/articRock.png"> Artic Rock to enter`,
+    unlockRequirement : function() { return item.articRock.got>0 },
+    level : 90,
+    team : {
+        slot1 : pkmn.articuno,
+        slot1Moves : [move.blizzard.id,move.iceBeam.id, move.hurricane.id, move.fly.id],
+    },
+    reward : [pkmn.articuno]
+}
+
+areas.fierySummit = {
+    rotation: 1,
+    type: `event`,
+    background : `volcano`,
+    level : 90,
+    uncatchable: true,
+    unlockDescription : `🔒 Defeat Elite Trainer Cynthia in VS to unlock`,
+    unlockRequirement : function() { return areas.vsEliteTrainerCynthia.defeated },
+    icon: pkmn.houndoom,
+    spawns: {
+        common : [pkmn.houndoom,pkmn.darmanitan,pkmn.magmortar,pkmn.alolanMarowak],
+    },
+    drops: {
+        common : [item.nothing],
+        rare : [item.fieryRock]
+    },
+}
+
+areas.eventMoltres = {
+    rotation: 1,
+    type: `event`,
+    name: `Moltres Roost`,
+    background : `cave`,
+    icon: pkmn.moltres,
+    trainer: true,
+    encounter: true,
+    difficulty: 25,
+    encounterEffect : function() {item.fieryRock.got--},
+    unlockDescription : `🔒 Requires a <img src="img/items/fieryRock.png"> Fiery Rock to enter`,
+    unlockRequirement : function() { return item.fieryRock.got>0 },
+    level : 90,
+    team : {
+        slot1 : pkmn.moltres,
+        slot1Moves : [move.fireBlast.id,move.heatWave.id, move.hurricane.id, move.fly.id],
+    },
+    reward : [pkmn.moltres]
 }
 
 /*

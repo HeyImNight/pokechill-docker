@@ -19,7 +19,8 @@ function updateGameVersion() {
     saved.tutorialStep = "intro"
   }
 
-  saved.version = 0.4
+
+  saved.version = 0.5
   document.getElementById(`game-version`).innerHTML = `v${saved.version}`
 
 }

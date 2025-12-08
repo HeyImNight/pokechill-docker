@@ -212,50 +212,55 @@ item.babiriBerry = {
 
 item.waterStone = {
     evo: true,
-    info: function() {return `Evolve certain kinds of Pokemon`},
+    info: function() {return `Evolve certain kinds of Pokemon (Must be level ${wildAreaLevel2}+)`},
 }
 item.thunderStone = {
     evo: true,
-    info: function() {return `Evolve certain kinds of Pokemon`},
+    info: function() {return `Evolve certain kinds of Pokemon (Must be level ${wildAreaLevel2}+)`},
 }
 item.sunStone = {
     evo: true,
-    info: function() {return `Evolve certain kinds of Pokemon`},
+    info: function() {return `Evolve certain kinds of Pokemon (Must be level ${wildAreaLevel2}+)`},
+}
+
+item.linkStone = {
+    evo: true,
+    info: function() {return `Evolve certain kinds of Pokemon (Must be level ${wildAreaLevel4}+)`},
 }
 
 item.ovalStone = {
     evo: true,
-    info: function() {return `Evolve certain kinds of Pokemon`},
+    info: function() {return `Evolve certain kinds of Pokemon (Must be level ${wildAreaLevel2}+)`},
 }
 item.moonStone = {
     evo: true,
-    info: function() {return `Evolve certain kinds of Pokemon`},
+    info: function() {return `Evolve certain kinds of Pokemon (Must be level ${wildAreaLevel2}+)`},
 }
 item.leafStone = {
     evo: true,
-    info: function() {return `Evolve certain kinds of Pokemon`},
+    info: function() {return `Evolve certain kinds of Pokemon (Must be level ${wildAreaLevel2}+)`},
 }
 item.iceStone = {
     evo: true,
-    info: function() {return `Evolve certain kinds of Pokemon`},
+    info: function() {return `Evolve certain kinds of Pokemon (Must be level ${wildAreaLevel2}+)`},
 }
 
 item.fireStone = {
     evo: true,
-    info: function() {return `Evolve certain kinds of Pokemon`},
+    info: function() {return `Evolve certain kinds of Pokemon (Must be level ${wildAreaLevel2}+)`},
 }
 item.duskStone = {
     evo: true,
-    info: function() {return `Evolve certain kinds of Pokemon`},
+    info: function() {return `Evolve certain kinds of Pokemon (Must be level ${wildAreaLevel2}+)`},
 }
 item.dawnStone = {
     evo: true,
-    info: function() {return `Evolve certain kinds of Pokemon`},
+    info: function() {return `Evolve certain kinds of Pokemon (Must be level ${wildAreaLevel2}+)`},
 }
 
 item.shinyStone = {
     evo: true,
-    info: function() {return `Evolve certain kinds of Pokemon`},
+    info: function() {return `Evolve certain kinds of Pokemon (Must be level ${wildAreaLevel2}+)`},
 }
 
 
@@ -317,9 +322,20 @@ item.mentalHerb = {
 
 
 
+item.thunderousRock = {
+    type: "key",
+    info: function() {return `Can be used to catch Zapdos once`},
+}
 
+item.fieryRock = {
+    type: "key",
+    info: function() {return `Can be used to catch Moltres once`},
+}
 
-
+item.articRock = {
+    type: "key",
+    info: function() {return `Can be used to catch Articuno once`},
+}
 
 
 

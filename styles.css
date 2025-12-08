@@ -267,6 +267,13 @@ flex-direction: column;
     opacity: 0.5;
 }
 
+.pkmn-movebox strong{
+    color: gray;
+    font-weight: 300;
+    margin-left: 0.5rem;
+    opacity: 0.7;
+}
+
 @keyframes wildPokemonDown{
     0%{}
     100%{opacity: 0; transform: translateY(1rem);}
@@ -1248,8 +1255,11 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     font-size: 0.8rem;
     image-rendering: pixelated;
     flex-shrink: 0;
+    overflow: hidden;
 
 }
+
+.explore-ticket vs-card-flair{z-index: 0;}
 
 .ticket-unlock{
     position: absolute;
@@ -1257,14 +1267,15 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     width: 100%;
     background: rgba(0,0,0,0.8);
     z-index: 101;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     text-align: center;
     color: white;
     font-size: 1.1rem;
     border-radius: 0.3rem;
     padding: 1rem;
+}
+
+.ticket-unlock img{
+    transform: translateY(30%);
 }
 
 .explore-ticket:hover{
@@ -1282,6 +1293,8 @@ border: 1px solid rgba(255, 255, 255, 0.3);
 .explore-ticket:active{
     scale: 0.98;
 }
+
+
 
 .explore-ticket div{
     height: 100%;
@@ -1308,6 +1321,12 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     , var(--light2);
 }
 
+.encounter-ticket div{
+    background: 
+    linear-gradient(180deg,rgb(184, 114, 114) 0%, rgb(184, 114, 172) 15%, rgba(0,0,0,0) 15%)
+    , var(--light2);
+}
+
 .explore-ticket-left {
     display: flex;
     justify-content: center;
@@ -1325,10 +1344,12 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     color: var(--light2);
     border-radius: 0.2rem;
     text-align: center;
+    z-index: 1;
 }
 
 .explore-ticket-left span{
     color: var(--dark2);
+    z-index: 1;
 }
 
 .explore-ticket-bg{
@@ -1503,6 +1524,8 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     position: relative;
 }
 
+
+
 .area-preview span{
     position: absolute;
     top: -0.5rem;
@@ -1543,6 +1566,46 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     padding: 0.5rem;
     color: var(--light2);
     border-radius: 0.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#pkmn-team-return{
+    position: absolute;
+    top: 1.5rem;
+    left: -2rem;
+    font-size: 1.2rem;
+    background: var(--dark1);
+    padding: 0.5rem 1rem;
+    color: var(--light2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: dashed var(--light1) 2px;
+    outline: var(--dark1) 5px solid;
+    box-shadow: rgba(0, 0, 0, 0.3) 5px 5px 3px 4px;
+    transition: 0.1s;
+    cursor: pointer;
+    padding-left: 3rem;
+}
+
+#pkmn-team-return:hover{
+    left: -0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.3)0px 0px 0px 0px;
+}
+
+#pkmn-team-return svg{
+    margin-right: 0.5rem;
+    height: 1.8rem;
+    width: 1.8rem;
+}
+
+#area-preview-spawns strong svg{
+    height: 1.5rem;
+    width: 1.5rem;
+    margin-left: 0.5rem;
+    color: rgb(255, 117, 117);
 }
 
 .hidden-pkmn img{
@@ -2059,6 +2122,7 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow: rgba(0, 0, 0, 0.4) 0 5px 5px;
     flex-shrink: 0;
     padding-top: 5rem;
+    position:relative
 }
 
 .team-menu-header span{

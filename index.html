@@ -51,6 +51,18 @@
             setTimeout(() => { document.getElementById(`item-menu`).style.display = "none";
             document.getElementById(`item-menu`).style.zIndex = "30" }, 500);
             document.getElementById("item-menu-cancel").style.display = "none";
+                dexTeamSelect = undefined; updateItemBag(); 
+                updatePreviewTeam()'
+                 style="display: none; background: rgb(255, 81, 81); color: white; border: none; ">Cancel</div>
+
+            <div id="item-menu-remove" onClick='
+            document.getElementById(`item-menu`).style.zIndex = "30";
+            document.getElementById(`item-menu`).style.zIndex = "30";
+            document.getElementById(`team-menu`).style.zIndex = "50";
+            document.getElementById(`team-menu`).style.display = "flex" ;
+            setTimeout(() => { document.getElementById(`item-menu`).style.display = "none";
+            document.getElementById(`item-menu`).style.zIndex = "30" }, 500);
+            document.getElementById("item-menu-rempve").style.display = "none";
                 if (saved.currentPreviewTeam == saved.preview1) saved.preview1[dexTeamSelect].item = undefined;
                 if (saved.currentPreviewTeam == saved.preview2) saved.preview2[dexTeamSelect].item = undefined;
                 if (saved.currentPreviewTeam == saved.preview3) saved.preview3[dexTeamSelect].item = undefined; 
@@ -59,7 +71,9 @@
                 if (saved.currentPreviewTeam == saved.preview6) saved.preview6[dexTeamSelect].item = undefined;
                 dexTeamSelect = undefined; updateItemBag(); 
                 updatePreviewTeam()'
-                 style="display: none; background: rgb(255, 81, 81); color: white; border: none; ">Cancel</div>
+                 style="display: none; background: rgb(255, 81, 81); color: white; border: none; ">Remove</div>
+
+
             <div onClick="bagCategory = 'held'; updateItemBag()">Held</div>
             <div onClick="bagCategory = 'tm'; updateItemBag()">TM's</div>
             <div onClick="bagCategory = 'key'; updateItemBag()">Key</div>
@@ -79,10 +93,16 @@
     <div id="team-menu" style="display: none;">
     <div class="pkmn-editor-exit" id="preview-team-exit"  onclick="afkSeconds = 0 ;injectPreviewTeam(); saveGame()">
         <svg style="margin-right: 0.35rem;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h11.175q.4 0 .763.15t.637.425l2.85 2.85q.275.275.425.638t.15.762V19q0 .825-.587 1.413T19 21zm7-3q1.25 0 2.125-.875T15 15t-.875-2.125T12 12t-2.125.875T9 15t.875 2.125T12 18m-5-8h7q.425 0 .713-.288T15 9V7q0-.425-.288-.712T14 6H7q-.425 0-.712.288T6 7v2q0 .425.288.713T7 10"/></svg>
-        Save and exit
+        Save and go!
     </div>
 
+
+
     <div class="team-menu-header">
+                <div id="pkmn-team-return" onclick="exitPkmnTeam()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path fill="currentColor" d="M19 7v6c0 1.103-.896 2-2 2H3v-3h13V8H5v2L1 6.5L5 3v2h12a2 2 0 0 1 2 2"/></svg>
+                    Go back</div>
+
         <span>
             <strong onClick="cyclePreviewTeams(-1)">◀</strong>
             <div id="team-preview-slot-1"></div>
@@ -110,7 +130,8 @@
         <div class="pokedex-filters">
 
             <div id="pokedex-filters-title" style="display: none; cursor: default;">Select a pokemon to teach Hydro Pump</div>
-            <div id="pokedex-filters-cancel" onClick="exitTmTeaching()" style="display: none; background: rgb(255, 81, 81); color: white;">Cancel</div>
+            <div id="pokedex-filters-cancel" onClick="exitTmTeaching('cancel')" style="display: none; background: rgb(255, 81, 81); color: white;">Cancel</div>
+            <div id="pokedex-filters-remove" onClick="exitTmTeaching('remove')" style="display: none; background: rgb(255, 81, 81); color: white;">Remove</div>
 
             <div>Filter type
             <select id="pokedex-filter-type">
@@ -376,6 +397,7 @@
         <svg style="margin-right: 0.35rem;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h11.175q.4 0 .763.15t.637.425l2.85 2.85q.275.275.425.638t.15.762V19q0 .825-.587 1.413T19 21zm7-3q1.25 0 2.125-.875T15 15t-.875-2.125T12 12t-2.125.875T9 15t.875 2.125T12 18m-5-8h7q.425 0 .713-.288T15 9V7q0-.425-.288-.712T14 6H7q-.425 0-.712.288T6 7v2q0 .425.288.713T7 10"/></svg>
         Save and exit
     </div>
+
 
     <div id="pkmn-editor-header" style="flex-direction: column;">
 
