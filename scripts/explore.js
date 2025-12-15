@@ -3799,7 +3799,6 @@ function updatePokedex(){
 
                 
             if (itemToUse == item.abilityPatch.id){
-                if (pkmn[i].level >= 100) continue
 
                 div.addEventListener("click", e => { 
 
