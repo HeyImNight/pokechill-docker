@@ -927,6 +927,8 @@ function openMenu(){
 
     if (!saved.claimedExportReward) {document.getElementById(`menu-export-reward`).style.display = "flex"} else document.getElementById(`menu-export-reward`).style.display = "none"
 
+    saved.currentAreaBuffer = undefined
+    
     if (areas.vsEliteFourLance.defeated == false)  {document.getElementById(`menu-item-genetics`).style.filter = `brightness(0.6)`}
     else {document.getElementById(`menu-item-genetics`).style.filter = `brightness(1)`}
 
@@ -4072,6 +4074,7 @@ function exitTmTeaching(mod){ //what a fucking disgrace of a code i wrote here
 function switchMenu(id){
 
     document.getElementById(`pokedex-menu`).scrollTop = 0
+    saved.currentAreaBuffer = undefined
 
     if (id=="genetics" && areas.vsEliteFourLance.defeated == false) {
         document.getElementById("tooltipTop").style.display = `none`
