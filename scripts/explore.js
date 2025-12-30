@@ -1167,9 +1167,9 @@ for (const i in team) {
 
 
             pkmn[ team[i].pkmn.id ].movepool.push(learntMove)
-            if (pkmn[ team[i].pkmn.id ].moves.slot2 === null) pkmn[ team[i].pkmn.id ].moves.slot2 = learntMove
-            else if (pkmn[ team[i].pkmn.id ].moves.slot3 === null) pkmn[ team[i].pkmn.id ].moves.slot3 = learntMove
-            else if (pkmn[ team[i].pkmn.id ].moves.slot4 === null) pkmn[ team[i].pkmn.id ].moves.slot4 = learntMove
+            if (pkmn[ team[i].pkmn.id ].moves.slot2 === null || pkmn[ team[i].pkmn.id ].moves.slot2 === undefined) pkmn[ team[i].pkmn.id ].moves.slot2 = learntMove
+            else if (pkmn[ team[i].pkmn.id ].moves.slot3 === null || pkmn[ team[i].pkmn.id ].moves.slot3 === undefined) pkmn[ team[i].pkmn.id ].moves.slot3 = learntMove
+            else if (pkmn[ team[i].pkmn.id ].moves.slot4 === null || pkmn[ team[i].pkmn.id ].moves.slot4 === undefined) pkmn[ team[i].pkmn.id ].moves.slot4 = learntMove
 
             pkmn[ team[i].pkmn.id ].newMoves.push(learntMove)
 
@@ -6421,4 +6421,5 @@ window.addEventListener('load', function() {
 
     //updateTeamExp()
 });
+
 
