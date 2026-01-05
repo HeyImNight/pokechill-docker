@@ -385,6 +385,8 @@ function learnPkmnMove(id, level, mod) {
 
 //used for the frontier 
 function learnPkmnMoveSeeded(id, level, mod, seed, exclude = []) {
+
+  //console.log(id)
     let attempts = 0;
     const MAX_ATTEMPTS = 100;
 

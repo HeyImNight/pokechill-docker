@@ -3539,7 +3539,7 @@ function initialiseArea(){
     if (team[exploreActiveMember].buffs[i]>0) team[exploreActiveMember].buffs[i] = 0
     } 
 
-            //reset move buildup, ie rollout
+    //reset move buildup, ie rollout
     for (const moveID in move) if(move[moveID].buildup!==undefined) move[moveID].buildup = 0
     
     updateTeamBuffs()
@@ -6729,8 +6729,8 @@ function setTrainingMenu() {
         saved.currentArea = areas.training.id
         saved.lastAreaJoined = areas.training.id
         document.getElementById("content-explore").style.display = "flex"
-        initialiseArea()
         document.getElementById(`training-menu`).style.display = `none`;
+        initialiseArea()
     }, 500);
 
     })
