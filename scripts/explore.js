@@ -238,7 +238,7 @@ function setWildPkmn(){
     
 
     hpMultiplier = 3;
-    if (areas.training.tier==2) hpMultiplier = 6;
+    if (areas.training.tier==2) hpMultiplier = 7;
     if (areas.training.tier==3) hpMultiplier = 17;
 
     areaDivision = numericDivision(areaDivision, "inverse")
@@ -592,7 +592,6 @@ function dropItem(){
 
      if (saved.hasPayDayBeenUsed == true){
         rareDropChance += 0.01
-        saved.hasPayDayBeenUsed == false
      }
 
     if (areas[saved.currentArea].drops?.uncommon && rng(0.15)) drop = arrayPick(areas[saved.currentArea].drops?.uncommon).id
@@ -641,9 +640,6 @@ function leaveCombat(){
     afkSeconds = 0
     transition()
     exploreCombatWildTurn = 0
-
-    saved.hasPayDayBeenUsed = false
-    saved.hasTeatimeBeenUsed = false
 
 
     for (const buff in wildBuffs){ if ( wildBuffs[buff]>0) wildBuffs[buff] = 0 }
@@ -762,7 +758,6 @@ function leaveCombat(){
 
     if (saved.hasTeatimeBeenUsed == true){
         rarePkmnChance += 0.01
-        saved.hasTeatimeBeenUsed == false
      }
 
 
@@ -958,7 +953,8 @@ function leaveCombat(){
 
 
 
-
+    saved.hasPayDayBeenUsed = false
+    saved.hasTeatimeBeenUsed = false
 
 
 
@@ -3022,7 +3018,7 @@ function exploreCombatPlayer() {
         for (let i = 0; i < multihit; i++) {
 
         if (!(team[exploreActiveMember].buffs?.freeze>0 || team[exploreActiveMember].buffs?.sleep>0)){
-        if (testAbility(`active`,  ability.sheerForce.id ) == false || ( testAbility(`active`, ability.sheerForce.id ) && totalPower==0  )){
+        if (testAbility(`active`,  ability.sheerForce.id ) == false || ( testAbility(`active`, ability.sheerForce.id ) && totalPower==0 && ability.unaffectedBySheerForce!=true  )){
         if (nextMove.hitEffect && (typeEffectiveness(moveType, pkmn[saved.currentPkmn].type)!= 0 || totalPower==0 || testAbility(`active`,  ability.noGuard.id ))) {
             nextMove.hitEffect("wild")
         }
@@ -3823,7 +3819,7 @@ function setWildAreas() {
 
 
     //generate the wildlife park pokemon
-    if (saved.lastWildlifeRotation != rotationWildCurrent) {
+    if (saved.lastWildlifeRotation != rotationWildCurrent && document.getElementById("explore-menu").style.display == "flex" ) {
         
         saved.lastWildlifeRotation = rotationWildCurrent
 
@@ -7240,11 +7236,11 @@ function returnDivisionStars(target, stat){
 
     return 4 + bonus
 
-    if (division == "D" || division == "C") return 2 + bonus
+    /*if (division == "D" || division == "C") return 2 + bonus
     if (division == "B") return 3 + bonus
     if (division == "A") return 4 + bonus
     if (division == "S") return 5 + bonus
-    if (division == "SS" || division == "SSS") return 6 + bonus
+    if (division == "SS" || division == "SSS") return 6 + bonus*/
 
 
 
