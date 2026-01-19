@@ -516,7 +516,10 @@ function setSearchTags() {
         
         if ( wildlifePoolCommon.includes(e) || wildlifePoolUncommon.includes(e) || wildlifePoolRare.includes(e) ) pkmn[e].tagObtainedIn = "park"
         if ( exclusiveFrontierPkmn.includes(pkmn[e]) ) pkmn[e].tagObtainedIn = "frontier"
+        if (pkmn[e].pokerus) pkmn[e].tagPokerus = "pokerus"
     }
+
+    
     
 
     //only required for unobtainable pokes

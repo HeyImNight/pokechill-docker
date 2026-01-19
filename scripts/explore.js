@@ -7113,7 +7113,7 @@ let shinyChance = 1/100
 if (saved.geneticHost== undefined || saved.geneticSample == undefined) shinyChance = 0
 else {
 if (samplePkmn.shiny && compability == 2) shinyChance = 1/25
-if (samplePkmn.shiny && compability == 3) shinyChance = 1/10
+if (samplePkmn.shiny && compability == 3) shinyChance = 1/5
 if (samplePkmn.shiny && compability == 4) shinyChance = 1/1
 if (pkmn[saved.geneticHost].shiny) shinyChance = 0
 }
