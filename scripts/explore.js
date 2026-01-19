@@ -1066,7 +1066,7 @@ function rejoinArea(){
 
     for (const i in team){
     if (team[i].pkmn==undefined) continue
-    if (team[i].damageDealt) team[i].damageDealt = 0
+    team[i].damageDealt = 0
     }
 
 
@@ -7763,7 +7763,7 @@ function battleSummary() {
 let totalDamageDealt = 0
 for (const i in team){
     if (team[i].pkmn==undefined) continue
-    if (team[i].damageDealt == NaN) team[i].damageDealt = 0
+    if (team[i].damageDealt == NaN || team[i].damageDealt == undefined) team[i].damageDealt = 0
     if (team[i].damageDealt) totalDamageDealt += team[i].damageDealt
 }
 
