@@ -833,7 +833,7 @@ function leaveCombat(){
                 }
                 const rewardId = arrayPick(rewards)
 
-                if (saved.factoryRewardsClaimed<50){
+                if (saved.factoryRewardsClaimed<30){
                 item[rewardId].newItem++
                 item[rewardId].got++
                 }
