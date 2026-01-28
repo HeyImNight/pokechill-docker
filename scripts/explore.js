@@ -2536,9 +2536,10 @@ function exploreCombatPlayer() {
 
             let divisionMult = 1
 
-            if (rotationFrontierCurrent == 1)  divisionMult = 1.25
-            if (rotationFrontierCurrent == 3)  divisionMult = 0.85
-            if (rotationFrontierCurrent == 4)  divisionMult = 0.5
+            //was .25, but too low i believe, at least for div 3
+            if (rotationFrontierCurrent == 1)  divisionMult = 1.5
+            if (rotationFrontierCurrent == 3)  divisionMult = 0.5
+            if (rotationFrontierCurrent == 4)  divisionMult = 0.25
 
             battleFactoryScore += Math.ceil(  (totalPower*divisionMult)  /100)
 
