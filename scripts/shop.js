@@ -627,6 +627,20 @@ shop.acidSprayTm = {
     category: `tm`,
 }
 
+shop.nastyPlotTm = {
+    icon: item.nastyPlotTm.id,
+    price: 5,
+    currency: `gold`,
+    category: `tm`,
+}
+
+shop.swordsDanceTm = {
+    icon: item.swordsDanceTm.id,
+    price: 5,
+    currency: `gold`,
+    category: `tm`,
+}
+
 shop.hailTm = {
     icon: item.hailTm.id,
     price: 10,
@@ -669,26 +683,7 @@ shop.grassyTerrainTm = {
     category: `tm`,
 }
 
-shop.nastyPlotTm = {
-    icon: item.nastyPlotTm.id,
-    price: 10,
-    currency: `gold`,
-    category: `tm`,
-}
 
-shop.swordsDanceTm = {
-    icon: item.swordsDanceTm.id,
-    price: 10,
-    currency: `gold`,
-    category: `tm`,
-}
-
-shop.swordsDanceTm = {
-    icon: item.swordsDanceTm.id,
-    price: 10,
-    currency: `gold`,
-    category: `tm`,
-}
 shop.voltSwitchTm = {
     icon: item.voltSwitchTm.id,
     price: 10,

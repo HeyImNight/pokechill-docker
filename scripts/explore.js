@@ -1517,12 +1517,12 @@ function openMenu(){
 
 
 
-    if (saved.wonderTradeClaimed == true) document.getElementById(`menu-wonder-trade`).style.display = "none"
     if (saved.mysteryGiftClaimed == true) document.getElementById(`menu-mystery-gift`).style.display = "none"
     const today = new Date();
     if (today > mysteryGift.duration) document.getElementById(`menu-mystery-gift`).style.display = "none"
 
     if (!saved.claimedExportReward) {document.getElementById(`menu-export-reward`).style.display = "flex"} else document.getElementById(`menu-export-reward`).style.display = "none"
+    if (!saved.wonderTradeClaimed) {document.getElementById(`menu-wonder-trade`).style.display = "flex"} else document.getElementById(`menu-wonder-trade`).style.display = "none"
 
     saved.currentAreaBuffer = undefined
     
@@ -2647,8 +2647,8 @@ function exploreCombatPlayer() {
 
 
         if (team[exploreActiveMember].turn>=5){
-        if (team[exploreActiveMember].item == item.ejectButton.id) {switchMemberNext(); return}
-        if (team[exploreActiveMember].item == item.ejectPack.id) {switchMemberNext(-1); return}
+        if (team[exploreActiveMember].item == item.ejectButton.id) {team[exploreActiveMember].turn=1; switchMemberNext(); return}
+        if (team[exploreActiveMember].item == item.ejectPack.id) {team[exploreActiveMember].turn=1; switchMemberNext(-1); return}
         }
 
 
@@ -4053,7 +4053,8 @@ function updateDailyCounters() {
     getSeed();
     setWildAreas();
     setDungeonAreas();
-    assignPokerus()
+    assignPokerus();
+    resetDailyTimers();
   }
 
   const nextHalfDayStart = (halfDayNumber + 1) * (1000 * 60 * 60 * 12);
@@ -6143,25 +6144,16 @@ function loop() {
     
     afkSecondsGenetics += elapsed;
 
-    //if (afkSeconds>0 && document.getElementById("content-explore").style.display == "flex" && document.getElementById(`tooltipBackground`).style.display !== "flex") document.getElementById("afk-overlay").style.display = "flex"
-    //else document.getElementById("afk-overlay").style.display = "none"
-
-    
     if (elapsed > 0.1) {
         afkSeconds += elapsed;
 
-
-
+        /*
         const elapsedDifference = (timeNow - saved.lastExportReset) / 1000;
-
+        
         if (elapsedDifference >= 43200) {
-            saved.claimedExportReward = false;
-            saved.wonderTradeClaimed = false;
+
             saved.lastExportReset = timeNow;
-        }
-
-
-
+        }*/
 
     }
 
@@ -6502,6 +6494,9 @@ saved.claimedExportReward = false
 function claimExportReward(){
 
 
+        if (saved.claimedExportReward) return
+
+
         if (areas.vsGymLeaderBrock.defeated == false) {
         document.getElementById("tooltipTop").style.display = `none`
         document.getElementById("tooltipTitle").style.display = `none`
@@ -6732,6 +6727,20 @@ let geneticItemSelect = false
     })
 
 
+
+saved.lastDailyReset = undefined
+
+function resetDailyTimers() {
+
+    if (saved.lastDailyReset!=rotationWildCurrent){
+    saved.lastDailyReset = rotationWildCurrent;
+
+            saved.claimedExportReward = false;
+            saved.wonderTradeClaimed = false;
+
+    }
+
+}
 
 
 
@@ -7792,6 +7801,9 @@ function returnDivisionStars(target, stat){
 
 
 function claimWonderTrade(){
+
+
+    if (saved.wonderTradeClaimed) return
 
 
     if (areas.vsMasterTrainerGeeta.defeated == false) {

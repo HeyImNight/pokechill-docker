@@ -596,7 +596,8 @@ flex-direction: column;
     width: 100% !important;
     border-radius: 0.3rem !important;
     box-shadow: rgba(0, 0, 0, 0.4) 5px 0 5px;
-    
+    max-height: 40rem;
+
 
 }
 
@@ -605,7 +606,7 @@ flex-direction: column;
 }
 
 #menu-items {
-    height: 100%;
+    height: auto;
     width: 100%;
     display: none;
     justify-content: center;
@@ -613,6 +614,7 @@ flex-direction: column;
     padding: 1rem;
     flex-wrap: wrap;
     gap: 0.5rem;
+    overflow-y: scroll;
 }
 
 #menu-button svg{
@@ -637,6 +639,7 @@ flex-direction: column;
     cursor: pointer;
     transition: 0.1s;
     line-height: 0.8rem;
+    flex-shrink: 0;
 }
 
 .menu-item:active{
@@ -2463,6 +2466,7 @@ z-index: 0;
     align-items: center;
     border-radius: 0 1rem 1rem 0 !important;
     margin-right: auto;
+    pointer-events: none;
 }
 
 #item-menu-list div:active{

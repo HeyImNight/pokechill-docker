@@ -1753,7 +1753,7 @@ move.sharkJaws = {
     split: "physical",
     rarity: 2,
     type: "steel",
-    power: 65,
+    power: 70,
     info: function() {return `10% chance to decrease enemy Defense by 50%`},
     hitEffect: function(target) { if (rng(0.10)) moveBuff(target,'defdown1') },
     affectedBy: [ability.strongJaw.id]
@@ -1951,7 +1951,7 @@ move.razorTalons = {
     split: "physical",
     rarity: 3,
     type: "flying",
-    power: 30,
+    power: 40,
     info: function() {return `Hits 2 times`},
     multihit: [2,2],
     affectedBy: [ability.toughClaws.id]
@@ -2046,7 +2046,7 @@ move.poisonClaw = {
     split: "physical",
     rarity: 2,
     type: "poison",
-    power: 65,
+    power: 75,
     info: function() {return `10% chance to inflict ${tagPoisoned}`},
     hitEffect: function(target) { if (rng(0.10)) moveBuff(target,'poisoned') },
     affectedBy: [ability.toughClaws.id]
@@ -2925,7 +2925,7 @@ move.psychicFangs = {
     split: "physical",
     rarity: 2,
     type: "psychic",
-    power: 65,
+    power: 75,
     affectedBy: [ability.strongJaw.id]
 }
 
@@ -4012,9 +4012,10 @@ move.iceHammer = {
 move.dragonDarts = {  
     split: "physical",
     type: "dragon",
-    power: t4Base/2,
+    power: 50,
     info: function() {return `Hits 2 times`},
     multihit: [2,2],
+    affectedBy: [ability.megaLauncher.id]
 }
 
 move.hiJumpKick = {
