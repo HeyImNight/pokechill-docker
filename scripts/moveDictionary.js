@@ -3729,13 +3729,13 @@ move.boomburst = {
 
 move.eggBomb = {
     split: "physical",
-    type: "normal",
+    type: "grass",
     power: t4Base,
 }
 
 move.cometPunch = {
     split: "physical",
-    type: "normal",
+    type: "flying",
     power: t4Base/3,
     info: function() {return `Hits 2-5 times`},
     multihit: [2,5],

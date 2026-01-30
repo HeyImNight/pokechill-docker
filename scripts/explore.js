@@ -2537,9 +2537,9 @@ function exploreCombatPlayer() {
             let divisionMult = 1
 
             //was .25, but too low i believe, at least for div 3
-            if (rotationFrontierCurrent == 1)  divisionMult = 1.5
-            if (rotationFrontierCurrent == 3)  divisionMult = 0.5
-            if (rotationFrontierCurrent == 4)  divisionMult = 0.25
+            if (rotationFrontierCurrent == 1)  divisionMult = 1.3
+            if (rotationFrontierCurrent == 3)  divisionMult = 0.7
+            if (rotationFrontierCurrent == 4)  divisionMult = 0.5
 
             battleFactoryScore += Math.ceil(  (totalPower*divisionMult)  /100)
 
@@ -6410,7 +6410,7 @@ function moveBuff(target,buff,mod){
 
         if (team[exploreActiveMember].item == item.lightClay.id && /atkup1|atkup2|defup1|defup2|stakup1|stakup2|sdefup1|sdefup2|speup1|speup2/.test(buff) ) affectedTurns++
         if (team[exploreActiveMember].item == item.mentalHerb.id && /atkdown1|atkdown2|defdown1|defdown2|stakdown1|stakdown2|sdefdown1|sdefdown2|spedown1|spedown2burn|freeze|confused|paralysis|poisoned|sleep/.test(buff) ) affectedTurns--
-        if (team[exploreActiveMember].item == item.clearAmulet.id && /atkdown1|atkdown2|defdown1|defdown2|stakdown1|stakdown2|sdefdown1|sdefdown2|spedown1|spedown2burn|freeze|confused|paralysis|poisoned|sleep/.test(buff) ) affectedTurns-= Math.floor(item.clearAmulet.power())
+        if (team[exploreActiveMember].item == item.clearAmulet.id && /atkdown1|atkdown2|defdown1|defdown2|stakdown1|stakdown2|sdefdown1|sdefdown2|spedown1|spedown2burn|freeze|confused|paralysis|poisoned|sleep/.test(buff) ) affectedTurns-= Math.max( Math.floor(item.clearAmulet.power()) ,0)
 
 
         if (testAbility(`active`, ability.hydratation.id ) && saved.weather == "rainy" && saved.weatherTimer>0 && /burn|freeze|confused|paralysis|poisoned|sleep/.test(buff)) {return}
@@ -6456,7 +6456,7 @@ function moveBuff(target,buff,mod){
         
         if (team[exploreActiveMember].item == item.lightClay.id && /atkup1|atkup2|defup1|defup2|stakup1|stakup2|sdefup1|sdefup2|speup1|speup2/.test(buff) ) affectedTurns++
         if (team[exploreActiveMember].item == item.mentalHerb.id && /atkdown1|atkdown2|defdown1|defdown2|stakdown1|stakdown2|sdefdown1|sdefdown2|spedown1|spedown2burn|freeze|confused|paralysis|poisoned|sleep/.test(buff) ) affectedTurns--
-        if (team[exploreActiveMember].item == item.clearAmulet.id && /atkdown1|atkdown2|defdown1|defdown2|stakdown1|stakdown2|sdefdown1|sdefdown2|spedown1|spedown2burn|freeze|confused|paralysis|poisoned|sleep/.test(buff) ) affectedTurns-= Math.floor(item.clearAmulet.power())
+        if (team[exploreActiveMember].item == item.clearAmulet.id && /atkdown1|atkdown2|defdown1|defdown2|stakdown1|stakdown2|sdefdown1|sdefdown2|spedown1|spedown2burn|freeze|confused|paralysis|poisoned|sleep/.test(buff) ) affectedTurns-= Math.max( Math.floor(item.clearAmulet.power()) ,0)
 
         //if (pkmn[team[exploreActiveMember].pkmn.id].ability == ability.hydratation.id && saved.weather == "rainy" && saved.weatherTimer>0 && /burn|freeze|confused|paralysis|poisoned|sleep|defdown1|defdown2|atkdown1|atkdown2|sdefdown1|sdefdown2|satkdown1|satkdown2|spedown1|spedown2/.test(buff)) {return}
         if (testAbility(`active`, ability.hydratation.id ) && saved.weather == "rainy" && saved.weatherTimer>0 && /burn|freeze|confused|paralysis|poisoned|sleep/.test(buff)) {return}

@@ -11365,7 +11365,7 @@ pkmn.zoroark = {
 }
 
 pkmn.hisuianZoroark = {
-  type: ["normal", "dark"],
+  type: ["normal", "ghost"],
   bst: {
     hp: 55,
     atk: 100,
