@@ -8099,9 +8099,11 @@ window.addEventListener('load', function() {
     setSearchTags()
 
     assignPokerus()
+    resetDailyTimers()
 
     pkmnWalkCandidates()
     arceusCheck()
     //updateTeamExp()
 });
+
 
