@@ -247,7 +247,7 @@ function tooltipData(category, ttdata){
 
 
 
-        if (areas[ttdata].fieldEffect) { 
+        if (areas[ttdata].fieldEffect && areas[ttdata].type != "frontier") { 
             document.getElementById("preview-field-effects").innerHTML = `Field Effects`
             document.getElementById("preview-field-effects").className = "preview-field-list"
         for (const i of areas[ttdata].fieldEffect) {
