@@ -7,14 +7,14 @@
 This is a fork of https://github.com/play-pokechill/play-pokechill.github.io. with some added features.
 main differences, 
 1. Added SQLite database for login in settings
-2. It is now a docker. on dockerhub at, https://hub.docker.com/repository/docker/nightis/pokechill/general
+2. It is now a docker. on dockerhub at, https://hub.docker.com/repository/docker/nightis/pokechill-docker/general
 
 # How to set up
 it has the docker file but for sake of convience, here is the docker.compose
 ```
 services:
   pokechill:
-    image: nightis/pokechill:latest
+    image: nightis/pokechill-docker:latest
     container_name: pokechill
     ports:
       - "3000:3000"

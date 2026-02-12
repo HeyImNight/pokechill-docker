@@ -1,7 +1,7 @@
 version: '3'
 services:
   pokechill:
-    image: nightis/pokechill:latest
+    image: nightis/pokechill-docker:latest
     container_name: pokechill
     ports:
       - "3000:3000"
