@@ -3,7 +3,7 @@ FROM node:18-alpine
 WORKDIR /usr/src/app
 
 # Copy package.json and package-lock.json (if available)
-COPY package*.json ./
+# COPY package*.json ./
 COPY server/package*.json ./server/
 
 # Install dependencies
