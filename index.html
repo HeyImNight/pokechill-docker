@@ -11,6 +11,7 @@
 
 
 
+    <script src="scripts/audio.js"></script>
     <script src="scripts/auth.js"></script>
 </head>
 
@@ -519,6 +520,16 @@
                         <option value="coral">coral</option>
                         <option value="oled">oled</option>
                     </select></div>
+
+                <div class="settings-audio-control"
+                    style="margin-top: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <span>Volume:</span>
+                    <input id="settings-volume-slider" type="range" min="0" max="1" step="0.1" value="0.5"
+                        oninput="AudioManager.setVolume(this.value)">
+                    <div id="settings-mute-btn" onclick="AudioManager.toggleMute()"
+                        style="background: #e74c3c; cursor: pointer; padding: 0.2rem 0.5rem; border-radius: 4px; color: white;">
+                        Mute</div>
+                </div>
 
                 <div data-help="settingsNewPkmn" style="cursor: help;">Hide non-new Pokemon got in summary: <select
                         id="settings-hide-got">
