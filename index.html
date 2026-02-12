@@ -20,13 +20,6 @@
     <div id="bg-pattern"></div>
 
 
-    <div id="fast-forward-btn" onclick="toggleFastForward()"
-        style="position: fixed; top: 10px; right: 10px; z-index: 1000; background: rgba(0,0,0,0.5); border-radius: 50%; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; cursor: pointer; border: 2px solid white;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
-            <path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z" />
-        </svg>
-    </div>
-
     <div id="debug-panel" style="display: none;">
 
         <div onclick="changeTheme('dark')">Dark Theme</div>
@@ -527,6 +520,17 @@
                         <option value="coral">coral</option>
                         <option value="oled">oled</option>
                     </select></div>
+
+
+                <div style="margin-top: 0.5rem;">Music:
+                    <select id="settings-music-select" onchange="AudioManager.play(this.value)">
+                        <option value="">None</option>
+                        <option value="menu">Menu Theme</option>
+                        <option value="battle">Battle Theme</option>
+                        <option value="intro">Intro Theme</option>
+                    </select>
+                </div>
+
 
                 <div class="settings-audio-control"
                     style="margin-top: 1rem; display: flex; align-items: center; gap: 0.5rem;">

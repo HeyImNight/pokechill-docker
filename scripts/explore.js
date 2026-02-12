@@ -60,19 +60,23 @@ function random(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+
 function toggleFastForward() {
-    const btn = document.getElementById('fast-forward-btn');
-    if (saved.overrideBattleTimer === defaultPlayerMoveTimer) {
-        // Enable Fast Forward (10x speed => 200ms)
-        saved.overrideBattleTimer = 200;
-        if (btn) btn.style.background = "rgba(46, 204, 113, 0.8)"; // Greenish
-    } else {
-        // Disable Fast Forward (Normal speed => 2000ms)
-        saved.overrideBattleTimer = defaultPlayerMoveTimer;
-        if (btn) btn.style.background = "rgba(0,0,0,0.5)";
-    }
+    // Deprecated
 }
 
+//COMBAT
+//-----------------------------------------------------------------------------------------------------------------------
+
+
+function mulberry32(a) {
+    return function () {
+        var t = a += 0x6D2B79F5;
+        t = Math.imul(t ^ t >>> 15, t | 1);
+        t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    }
+}
 
 
 function voidAnimation(divName, animationName) {
@@ -113,9 +117,9 @@ function arrayPick(array, n = 1, seed) {
     const picks = [];
 
     for (let i = 0; i < count; i++) {
-        const index = Math.floor(rng() * pool.length);
-        picks.push(pool[index]);
-        pool.splice(index, 1);
+        const randomIndex = Math.floor(rng() * pool.length);
+        picks.push(pool[randomIndex]);
+        pool.splice(randomIndex, 1);
     }
 
     return n === 1 ? picks[0] : picks;
@@ -628,7 +632,7 @@ function setWildPkmn() {
     voidAnimation(`explore-wild-sprite`, `wildPokemonSpawn 0.5s 1`)
     updateWildPkmn()
 
-    AudioManager.play('battle');
+
 }
 
 
@@ -772,7 +776,7 @@ function exitCombat() {
 
     voidAnimation("area-end", "tooltipBoxAppear 0.2s reverse 1 ease-in");
     setTimeout(() => { document.getElementById("area-end").style.display = "none" }, 150);
-    AudioManager.play('menu');
+    AudioManager.play('battle');
     saveGame()
 
 
@@ -2051,41 +2055,15 @@ function gameLoop(now) {
     let delta = now - lastDeltaTime;
     lastDeltaTime = now;
 
+    // Prevents huge leaps
     if (delta > 250) delta = 250;
 
     accumulator += delta;
 
-    let stepsExecuted = 0;
-
-
-    // FAST FORWARD AFK
-    while (
-        (accumulator >= STEP || afkSeconds > 0) &&
-        stepsExecuted < MAX_STEPS_PER_FRAME
-    ) {
-
+    while (accumulator >= STEP) {
         exploreCombatPlayer();
         exploreCombatWild();
-
-
-        // Execute once per second (every 60 steps = 1000ms)
-        if (afkSeconds > 0 && stepsExecuted % 60 === 0 && areas[saved.currentArea]?.timed) {
-            updateRaidTimer();
-        }
-
-
-
-        // use logic time
-        if (afkSeconds > 0) {
-            if (shouldCombatStop() == false) afkSeconds -= STEP / 1000;
-            if (afkSeconds < 0) afkSeconds = 0;
-        } else {
-            accumulator -= STEP;
-        }
-
-        stepsExecuted++;
-
-
+        accumulator -= STEP;
     }
 
     requestAnimationFrame(gameLoop);
@@ -2176,7 +2154,12 @@ function exploreCombatPlayer() {
 
 
     //override battle timer (debug)
-    if (saved.overrideBattleTimer != defaultPlayerMoveTimer && moveTimerPlayer != saved.overrideBattleTimer) moveTimerPlayer = saved.overrideBattleTimer
+    //override battle timer (debug)
+    // console.log("Before Override: moveTimerPlayer", moveTimerPlayer, "Saved:", saved.overrideBattleTimer);
+    if (saved.overrideBattleTimer != defaultPlayerMoveTimer && moveTimerPlayer != saved.overrideBattleTimer) {
+        moveTimerPlayer = saved.overrideBattleTimer;
+        // console.log("Override Applied: moveTimerPlayer is now", moveTimerPlayer);
+    }
 
 
     //abilities
@@ -8472,9 +8455,8 @@ function claimWonderTrade() {
 function wonderTrade() {
 
     closeTooltip()
-    openMenu()
+    document.getElementById("explore-menu").style.display = "flex"
 
-    document.getElementById("wonder-menu").style.display = "flex"
 
     let chosenPokemon = `magikarp`
     let chosenShiny = false
