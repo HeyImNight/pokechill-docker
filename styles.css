@@ -473,6 +473,32 @@ flex-direction: column;
 }
 
 
+.team-move-editor{
+    z-index: 20;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 3rem;
+    width: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background: rgba(0,0,0,0.4);
+    border-radius: 0 0.5rem 0 0.5rem;
+    color: white;
+    transition: 0.1s;
+}
+
+.team-move-editor:hover{
+    background: rgba(0,0,0,0.6);
+    scale: 1.1;
+}
+
+.team-move-editor:active{
+    scale: 0.9;
+}
+
 
 @media (max-width: 1000px) {
 
