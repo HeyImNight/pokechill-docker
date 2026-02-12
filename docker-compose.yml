@@ -1,0 +1,9 @@
+version: '3'
+services:
+  pokechill:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./server/pokechill.db:/usr/src/app/server/pokechill.db
+    restart: always

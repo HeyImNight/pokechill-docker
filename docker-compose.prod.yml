@@ -1,0 +1,15 @@
+version: '3'
+services:
+  pokechill:
+    image: nightis/pokechill:latest
+    container_name: pokechill
+    ports:
+      - "3000:3000"
+    volumes:
+      # This maps a 'pokechill_data' docker volume to the container's data directory.
+      # Your save data and database will be stored here safely.
+      - pokechill_data:/data
+    restart: always
+
+volumes:
+  pokechill_data:
