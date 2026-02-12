@@ -55,9 +55,24 @@ function rngSeeded(number) {
 
 }
 
+
 function random(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+function toggleFastForward() {
+    const btn = document.getElementById('fast-forward-btn');
+    if (saved.overrideBattleTimer === defaultPlayerMoveTimer) {
+        // Enable Fast Forward (10x speed => 200ms)
+        saved.overrideBattleTimer = 200;
+        if (btn) btn.style.background = "rgba(46, 204, 113, 0.8)"; // Greenish
+    } else {
+        // Disable Fast Forward (Normal speed => 2000ms)
+        saved.overrideBattleTimer = defaultPlayerMoveTimer;
+        if (btn) btn.style.background = "rgba(0,0,0,0.5)";
+    }
+}
+
 
 
 function voidAnimation(divName, animationName) {
