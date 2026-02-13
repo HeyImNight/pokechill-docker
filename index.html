@@ -12,7 +12,7 @@
 
 
     <script src="scripts/audio.js"></script>
-    <script src="scripts/auth.js"></script>
+    <script src="scripts/audio.js"></script>
 </head>
 
 <body>
@@ -500,6 +500,7 @@
             </div>
 
             <div class="settings-list">
+                <div onclick="manualSave()">Save Data</div>
                 <div onclick="exportData()">Export Data</div>
 
                 <!-- Auth Button -->
@@ -1992,16 +1993,16 @@
 
 
 
-    <script src="scripts/script.js"></script>
-    <script src="scripts/teams.js"></script>
-    <script src="scripts/explore.js"></script>
-    <script src="scripts/shop.js"></script>
-    <script src="scripts/dictionarySearch.js"></script>
-    <script src="scripts/tooltip.js"></script>
-    <script src="scripts/decor.js"></script>
+    <script src="scripts/script.js?v=3"></script>
+    <script src="scripts/teams.js?v=3"></script>
+    <script src="scripts/explore.js?v=3"></script>
+    <script src="scripts/shop.js?v=3"></script>
+    <script src="scripts/dictionarySearch.js?v=3"></script>
+    <script src="scripts/tooltip.js?v=3"></script>
+    <script src="scripts/decor.js?v=3"></script>
 
-    <script src="scripts/save.js"></script>
-    <script src="scripts/auth.js"></script>
+    <script src="scripts/save.js?v=3"></script>
+    <script src="scripts/auth.js?v=3"></script>
 
     <!-- Auth Modal -->
     <div id="auth-modal"
@@ -2010,21 +2011,31 @@
             style="background: #2c3e50; padding: 2rem; border-radius: 10px; color: white; width: 300px; text-align: center; border: 2px solid #34495e;">
             <h2 id="auth-modal-title">Login</h2>
             <p style="font-size: 0.8rem; color: #bdc3c7; margin-bottom: 1rem;">Login to enable Cloud Saves.</p>
+            <p id="auth-debug-status" style="font-size: 0.7rem; color: #e74c3c; margin-bottom: 0.5rem; height: 1rem;">
+            </p>
             <input type="text" id="auth-username" placeholder="Username"
                 style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; border-radius: 5px; border: none;">
             <input type="password" id="auth-password" placeholder="Password"
-                style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; border-radius: 5px; border: none;">
+                style="width: 100%; padding: 0.5rem; margin-bottom: 0.5rem; border-radius: 5px; border: none;">
 
-            <div id="auth-submit-btn" onclick="handleAuthSubmit()"
+            <input type="password" id="auth-confirm-password" placeholder="Confirm Password"
+                style="width: 100%; padding: 0.5rem; margin-bottom: 0.5rem; border-radius: 5px; border: none; display: none;">
+
+            <div style="text-align: left; margin-bottom: 1rem; margin-left: 0.5rem; font-size: 0.8rem; color: #bdc3c7;">
+                <input type="checkbox" id="auth-show-password">
+                <label for="auth-show-password" style="cursor: pointer;">Show Password</label>
+            </div>
+
+            <div id="auth-submit-btn"
                 style="background: #27ae60; padding: 0.5rem; border-radius: 5px; cursor: pointer; margin-bottom: 1rem;">
                 Login</div>
 
-            <div id="auth-toggle-mode" onclick="toggleAuthMode()"
+            <div id="auth-toggle-mode"
                 style="font-size: 0.8rem; color: #3498db; cursor: pointer; text-decoration: underline;">Need an account?
                 Register</div>
 
-            <div onclick="playAsGuest()"
-                style="margin-top: 1rem; cursor: pointer; color: #95a5a6; font-size: 0.9rem; text-decoration: underline;">
+            <div id="auth-guest-btn"
+                style="margin-top: 1rem; cursor: pointer; color: #95a5a6; font-size: 0.9rem; text-decoration: underline; display: none;">
                 Play as Guest (Offline)</div>
         </div>
     </div>

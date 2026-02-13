@@ -1371,16 +1371,7 @@ function updateWildPkmn() {
     if (saved.overrideBattleTimer != defaultPlayerMoveTimer) respawnTimer = 1
 
     if (afkSeconds > 0) respawnTimer = 0 //woomp woomp
-
-
-
-
-
-
-
-
-
-
+    if (saved.gamemodFasterAfk) respawnTimer = 0
 
     const percent = (wildPkmnHp / wildPkmnHpMax) * 100;
 
@@ -1494,7 +1485,11 @@ function updateWildPkmn() {
         //document.getElementById(`pkmn-movebox-wild-${exploreCombatWildTurn}-bar`).style.width = "0%";
 
         document.getElementById("exploe-wild-hp").style.width = "0%";
-        voidAnimation(`explore-wild-sprite`, `wildPokemonDown ${respawnTimer + 1}s 1`)
+
+        let animDuration = respawnTimer + 1
+        if (saved.gamemodFasterAfk) animDuration = 0.1
+
+        voidAnimation(`explore-wild-sprite`, `wildPokemonDown ${animDuration}s 1`)
 
 
 
@@ -3265,6 +3260,10 @@ function exploreCombatWild() {
 
     //override battle timer (debug)
     if (saved.overrideBattleTimer != defaultPlayerMoveTimer && moveTimerWild != saved.overrideBattleTimer) moveTimerWild = saved.overrideBattleTimer
+
+    if (saved.gamemodFasterAfk) {
+        moveTimerWild /= 10
+    }
 
     if (areas[saved.currentArea].fieldEffect?.includes(field.averageTime.id)) { moveTimerWild = defaultPlayerMoveTimer }
 
@@ -8815,7 +8814,21 @@ window.startGame = function () {
     requestAnimationFrame(gameLoop);
 
 
-    if (saved.firstTimePlaying) {
+    // Check if player has no pokemon (fresh save or error)
+    let hasPokemon = false;
+    // Check if team has valid members
+    for (let key in team) {
+        if (team[key]) hasPokemon = true;
+    }
+    // Also check storage if team is empty but they might have pokemon (edge case, but for starter prompt we card about team)
+    // Actually, simply checking if they have caught 0 pokemon is safer for "New Game" status
+    let caughtCount = 0;
+    for (let i in pkmn) {
+        if (pkmn[i].caught) caughtCount++;
+    }
+
+    if (caughtCount === 0 || saved.firstTimePlaying) {
+        saved.firstTimePlaying = true;
         newGameIntro()
         createArenaCards()
     }

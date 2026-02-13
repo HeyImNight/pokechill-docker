@@ -70,11 +70,29 @@ function saveGame() {
     data[i].decorOwned = pkmn[i].decorOwned;
   }
 
-  localStorage.setItem("gameData", JSON.stringify(data));
+  // Policy: If logged in, DO NOT save to local storage (only Cloud)
+  // If Guest (not logged in), MUST save to local storage
+  const authToken = localStorage.getItem('pokechill_token');
+
+  if (!authToken) {
+    localStorage.setItem("gameData", JSON.stringify(data));
+  }
 
   // Cloud Save
   if (typeof saveToCloud === 'function') {
     saveToCloud(data);
+  }
+}
+
+function manualSave() {
+  saveGame();
+
+  // Check if logged in for better feedback
+  const authToken = localStorage.getItem('pokechill_token');
+  if (authToken) {
+    alert("Game Saved to Cloud successfully!");
+  } else {
+    alert("Game Saved to Local Storage! (Log in to enable Cloud Saves & Server Sync)");
   }
 }
 
@@ -157,21 +175,49 @@ function loadGame() {
 
 
 
-function exportData() {
-  saveGame(); // Ensure latest data
-  const raw = localStorage.getItem("gameData");
-  if (!raw) {
+async function exportData() {
+  const authToken = localStorage.getItem('pokechill_token');
+  let rawData = null;
+
+  if (authToken) {
+    // Fetch from Cloud
+    try {
+      const response = await fetch('/api/save', {
+        headers: { 'Authorization': `Bearer ${authToken}` }
+      });
+      if (response.ok) {
+        const json = await response.json();
+        if (json.data) {
+          rawData = JSON.stringify(json.data);
+          alert("Exporting Save from Cloud...");
+        }
+      }
+    } catch (e) {
+      console.error("Export fetch error:", e);
+      alert("Failed to fetch cloud save for export.");
+      return;
+    }
+  } else {
+    // Fallback to local for guests
+    saveGame(); // Ensure latest data
+    rawData = localStorage.getItem("gameData");
+    alert("Exporting Local Save (Guest Mode)...");
+  }
+
+  if (!rawData) {
     alert("No save data found to export.");
     return;
   }
 
-  const blob = new Blob([raw], { type: "application/json" });
+  const blob = new Blob([rawData], { type: "application/json" });
   const url = URL.createObjectURL(blob);
 
   const a = document.createElement("a");
   a.href = url;
   a.download = `Pokechill-${new Date().toISOString().split("T")[0]}.json`;
+  document.body.appendChild(a); // Append to body for firefox compatibility
   a.click();
+  document.body.removeChild(a);
 
   URL.revokeObjectURL(url);
 }
@@ -185,6 +231,15 @@ document.addEventListener("keydown", (ev) => {
 });
 
 function clearData() {
-  localStorage.clear();
+  localStorage.removeItem('gameData');
+  localStorage.removeItem('pokechill_token');
+  localStorage.removeItem('pokechill_username');
+  window.location.reload();
+}
+
+function wipeNewUser() {
+  localStorage.removeItem('gameData');
+  localStorage.removeItem('pokechill_saved_team');
+  localStorage.removeItem('pokechill_saved_version');
   window.location.reload();
 }

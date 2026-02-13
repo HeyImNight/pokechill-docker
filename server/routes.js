@@ -22,9 +22,11 @@ const authenticateToken = (req, res, next) => {
 
 // Register
 router.post('/register', async (req, res) => {
+    console.log('Register request received:', req.body);
     const { username, password } = req.body;
 
     if (!username || !password) {
+        console.error('Missing username or password');
         return res.status(400).json({ error: 'Username and password are required' });
     }
 
@@ -34,35 +36,48 @@ router.post('/register', async (req, res) => {
 
         db.run(sql, [username, hashedPassword], function (err) {
             if (err) {
+                console.error('Registration DB Error:', err.message);
                 if (err.message.includes('UNIQUE constraint failed')) {
                     return res.status(409).json({ error: 'Username already exists' });
                 }
                 return res.status(500).json({ error: err.message });
             }
+            console.log('User registered successfully, ID:', this.lastID);
             res.status(201).json({ message: 'User registered successfully', userId: this.lastID });
         });
     } catch (error) {
+        console.error('Registration Exception:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
 // Login
 router.post('/login', (req, res) => {
+    console.log('Login request received:', req.body);
     const { username, password } = req.body;
 
     const sql = `SELECT * FROM users WHERE username = ?`;
     db.get(sql, [username], async (err, user) => {
-        if (err) return res.status(500).json({ error: err.message });
-        if (!user) return res.status(401).json({ error: 'Invalid credentials' });
+        if (err) {
+            console.error('Login DB Error:', err.message);
+            return res.status(500).json({ error: err.message });
+        }
+        if (!user) {
+            console.log('Login failed: User not found', username);
+            return res.status(401).json({ error: 'Invalid credentials' });
+        }
 
         try {
             if (await bcrypt.compare(password, user.password_hash)) {
+                console.log('Login successful:', username);
                 const token = jwt.sign({ id: user.id, username: user.username }, SECRET_KEY, { expiresIn: '1h' });
                 res.json({ token, username: user.username });
             } else {
+                console.log('Login failed: Incorrect password');
                 res.status(401).json({ error: 'Invalid credentials' });
             }
         } catch (error) {
+            console.error('Login Exception:', error);
             res.status(500).json({ error: 'Internal Server Error' });
         }
     });
@@ -106,7 +121,26 @@ router.post('/save', authenticateToken, (req, res) => {
         // Fetch username for filename
         db.get('SELECT username FROM users WHERE id = ?', [userId], (uErr, uRow) => {
             if (!uErr && uRow) {
-                const filePath = path.join(savesDir, `${uRow.username}.json`);
+                const userDir = path.join(savesDir, uRow.username);
+                if (!fs.existsSync(userDir)) {
+                    fs.mkdirSync(userDir, { recursive: true });
+                }
+                const filePath = path.join(userDir, 'save.json');
+                const backup1 = path.join(userDir, 'save.json.1');
+                const backup2 = path.join(userDir, 'save.json.2');
+
+                try {
+                    if (fs.existsSync(backup1)) {
+                        if (fs.existsSync(backup2)) fs.unlinkSync(backup2);
+                        fs.renameSync(backup1, backup2);
+                    }
+                    if (fs.existsSync(filePath)) {
+                        fs.renameSync(filePath, backup1);
+                    }
+                } catch (rotErr) {
+                    console.error('Error rotating save files:', rotErr);
+                }
+
                 fs.writeFile(filePath, JSON.stringify(data, null, 2), (wErr) => {
                     if (wErr) console.error('Error syncing save to file:', wErr);
                 });

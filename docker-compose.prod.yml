@@ -6,10 +6,9 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      # This maps a 'pokechill_data' docker volume to the container's data directory.
-      # Your save data and database will be stored here safely.
-      - pokechill_data:/data
+      # This maps a local 'pokechill_data' directory to the container's data directory.
+      # Your database (pokechill.db) will be stored here and visible on the host.
+      - ./pokechill_data:/data
+      # This maps a local 'saves' directory to the container's saves directory for easy access
+      - ./saves:/usr/src/app/saves
     restart: always
-
-volumes:
-  pokechill_data:
