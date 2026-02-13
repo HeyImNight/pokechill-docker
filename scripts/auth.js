@@ -41,7 +41,9 @@ async function login(username, password) {
             updateAuthUI();
             closeAuthModal();
             // Try to load cloud save
-            loadCloudSave();
+            loadCloudSave().then(() => {
+                if (window.startGame) window.startGame();
+            });
         } else {
             alert(data.error || 'Login failed');
         }
@@ -118,10 +120,14 @@ async function loadCloudSave() {
         if (response.ok) {
             const data = await response.json();
             if (data.data) {
-                const choice = confirm("Cloud save found. Do you want to load it? This will overwrite your current local session.");
-                if (choice) {
-                    localStorage.setItem("gameData", JSON.stringify(data.data));
+                const cloudDataStr = JSON.stringify(data.data);
+                const localData = localStorage.getItem("gameData");
+
+                if (cloudDataStr !== localData) {
+                    console.log("New cloud save found, auto-loading...");
+                    localStorage.setItem("gameData", cloudDataStr);
                     window.location.reload();
+                    return new Promise(() => { }); // Never resolve if reloading
                 }
             }
         }
@@ -173,7 +179,23 @@ function handleAuthSubmit() {
     }
 }
 
+// Play as Guest
+window.playAsGuest = function () {
+    closeAuthModal();
+    if (window.startGame) window.startGame();
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     updateAuthUI();
+    if (authToken) {
+        // If logged in, check cloud save then start
+        loadCloudSave().then(() => {
+            // Only start if we didn't reload
+            if (window.startGame) window.startGame();
+        });
+    } else {
+        // If not logged in, modal is already open via CSS/HTML
+        // Do nothing, wait for user input
+    }
 });

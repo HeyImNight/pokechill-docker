@@ -154,15 +154,16 @@ function loadGame() {
 
 
 }
-  }
 
-
-}
 
 
 function exportData() {
+  saveGame(); // Ensure latest data
   const raw = localStorage.getItem("gameData");
-  if (!raw) return;
+  if (!raw) {
+    alert("No save data found to export.");
+    return;
+  }
 
   const blob = new Blob([raw], { type: "application/json" });
   const url = URL.createObjectURL(blob);
@@ -174,149 +175,6 @@ function exportData() {
 
   URL.revokeObjectURL(url);
 }
-
-function importData() {
-  const input = document.createElement("input");
-  input.type = "file";
-  input.accept = ".json";
-
-  input.onchange = () => {
-    const file = input.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = () => {
-      try {
-        const data = JSON.parse(reader.result);
-        localStorage.setItem("gameData", JSON.stringify(data));
-
-        loadGame();
-
-        window.location.reload();
-      } catch (err) {
-        alert("Error loading data.");
-      }
-    };
-
-    reader.readAsText(file);
-  };
-
-  input.click();
-}
-
-
-
-
-
-
-
-function exportToText() {
-  const raw = localStorage.getItem("gameData");
-  if (!raw) {
-    console.log("No save data found");
-    return null;
-  }
-
-  return raw;
-}
-
-function loadFromText() {
-  const input = document.getElementById("text-data-raw");
-  if (!input) {
-    alert("Element with id 'text-data-raw' not found");
-    return;
-  }
-
-  const jsonData = input.value.trim();
-  if (!jsonData) {
-    alert("No data found in the input");
-    return;
-  }
-
-  try {
-    const data = JSON.parse(jsonData);
-    localStorage.setItem("gameData", JSON.stringify(data));
-    loadGame();
-    window.location.reload();
-  } catch (err) {
-    alert("Error loading data: " + err.message);
-  }
-}
-
-// paste from clipboard using the API
-async function pasteFromClipboard() {
-  const input = document.getElementById("text-data-raw");
-  if (!input) {
-    alert("Element with id 'text-data-raw' not found");
-    return;
-  }
-
-  try {
-    const text = await navigator.clipboard.readText();
-    input.value = text;
-    alert("Data pasted successfully!");
-  } catch (err) {
-    alert("Could not paste from clipboard. Please paste manually or grant clipboard permissions.");
-  }
-}
-
-function textData() {
-  saveGame();
-  document.getElementById("tooltipTop").style.display = `none`;
-  document.getElementById("tooltipTitle").style.display = `none`;
-
-  const savedData = exportToText();
-
-  if (savedData) {
-    document.getElementById("tooltipMid").innerHTML = `
-      This is your savefile code<br>You can copy or paste savefile codes here to export or import saves<br>
-      <textarea id="text-data-raw" rows="10" style="width:95%; resize:vertical; font-family:monospace; font-size:0.9rem;"></textarea>
-    `;
-
-    document.getElementById("text-data-raw").value = savedData;
-
-    document.getElementById("tooltipBottom").innerHTML = `
-      <div style="display:flex;width:100%; align-items:center;justify-content:center; flex-wrap:wrap;">
-        <div onClick='navigator.clipboard.writeText(document.getElementById("text-data-raw").value); alert("Data copied to the Clipboard!");' 
-             style="cursor:pointer; font-size:2rem; width:33%; padding:10px;" id="prevent-tooltip-exit">
-          Copy
-        </div>
-        <div onClick='pasteFromClipboard()' 
-             style="cursor:pointer; font-size:2rem; width:33%; padding:10px;" id="prevent-tooltip-exit">
-          Paste
-        </div>
-        <div onClick='loadFromText()' 
-             style="cursor:pointer; font-size:2rem; width:33%; padding:10px;" id="prevent-tooltip-exit">
-          Load
-        </div>
-      </div>
-    `;
-  } else {
-    document.getElementById("tooltipMid").innerHTML = `
-      You can copy or paste savefile codes here to export or import saves<br>
-      <textarea id="text-data-raw" rows="10" style="width:95%; resize:vertical; font-family:monospace; font-size:0.9rem;"></textarea>
-    `;
-
-    document.getElementById("tooltipBottom").innerHTML = `
-      <div style="display:flex;width:100%; align-items:center;justify-content:center;">
-        <div onClick='pasteFromClipboard()' 
-             style="cursor:pointer; font-size:2rem; width:50%; padding:10px;" id="prevent-tooltip-exit">
-          Paste
-        </div>
-        <div onClick='loadFromText()' 
-             style="cursor:pointer; font-size:2rem; width:50%; padding:10px;" id="prevent-tooltip-exit">
-          Load
-        </div>
-      </div>
-    `;
-  }
-
-  openTooltip();
-}
-
-
-
-
 
 setInterval(saveGame, 1 * 60 * 1000);
 

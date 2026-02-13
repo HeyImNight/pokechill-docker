@@ -29,6 +29,18 @@ const db = new sqlite3.Database(dbPath, (err) => {
                 console.error("Error creating saves table:", err.message);
             }
         });
+
+        db.run(`CREATE TABLE IF NOT EXISTS backups (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER,
+            data_json TEXT,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY(user_id) REFERENCES users(id)
+        )`, (err) => {
+            if (err) {
+                console.error("Error creating backups table:", err.message);
+            }
+        });
     }
 });
 

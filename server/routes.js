@@ -75,10 +75,44 @@ router.post('/save', authenticateToken, (req, res) => {
 
     if (!data) return res.status(400).json({ error: 'No data provided' });
 
+    // Backup logic
+    db.get('SELECT data_json FROM saves WHERE user_id = ?', [userId], (err, row) => {
+        if (!err && row) {
+            db.run('INSERT INTO backups (user_id, data_json) VALUES (?, ?)', [userId, row.data_json], (backupErr) => {
+                if (!backupErr) {
+                    // Keep only last 3 backups
+                    db.run(`DELETE FROM backups WHERE user_id = ? AND id NOT IN (
+                        SELECT id FROM backups WHERE user_id = ? ORDER BY created_at DESC LIMIT 3
+                    )`, [userId, userId]);
+                }
+            });
+        }
+    });
+
     const sql = `INSERT OR REPLACE INTO saves (user_id, data_json, updated_at) VALUES (?, ?, CURRENT_TIMESTAMP)`;
 
     db.run(sql, [userId, JSON.stringify(data)], function (err) {
         if (err) return res.status(500).json({ error: err.message });
+
+        // Sync to JSON file
+        const fs = require('fs');
+        const path = require('path');
+        const savesDir = path.resolve(__dirname, '../saves');
+
+        if (!fs.existsSync(savesDir)) {
+            fs.mkdirSync(savesDir, { recursive: true });
+        }
+
+        // Fetch username for filename
+        db.get('SELECT username FROM users WHERE id = ?', [userId], (uErr, uRow) => {
+            if (!uErr && uRow) {
+                const filePath = path.join(savesDir, `${uRow.username}.json`);
+                fs.writeFile(filePath, JSON.stringify(data, null, 2), (wErr) => {
+                    if (wErr) console.error('Error syncing save to file:', wErr);
+                });
+            }
+        });
+
         res.json({ message: 'Game saved successfully' });
     });
 });

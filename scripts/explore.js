@@ -2154,11 +2154,16 @@ function exploreCombatPlayer() {
 
 
     //override battle timer (debug)
+
     //override battle timer (debug)
     // console.log("Before Override: moveTimerPlayer", moveTimerPlayer, "Saved:", saved.overrideBattleTimer);
     if (saved.overrideBattleTimer != defaultPlayerMoveTimer && moveTimerPlayer != saved.overrideBattleTimer) {
         moveTimerPlayer = saved.overrideBattleTimer;
         // console.log("Override Applied: moveTimerPlayer is now", moveTimerPlayer);
+    }
+
+    if (saved.gamemodFasterAfk) {
+        moveTimerPlayer /= 10
     }
 
 
@@ -8785,9 +8790,7 @@ function renamePokemon() {
 
 
 
-window.addEventListener('load', function () {
-
-
+window.startGame = function () {
     loadGame();
     getSeed();
     seasonCheck();
@@ -8849,4 +8852,8 @@ window.addEventListener('load', function () {
 
     if (saved.arenaCard1 == undefined) createArenaCards()
     //updateTeamExp()
+}
+
+window.addEventListener('load', function () {
+    // Auth will call startGame()
 });

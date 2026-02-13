@@ -501,8 +501,6 @@
 
             <div class="settings-list">
                 <div onclick="exportData()">Export Data</div>
-                <div onclick="importData()">Import Data</div>
-                <div onclick="textData()">Data to Text</div>
 
                 <!-- Auth Button -->
                 <div id="auth-open-btn" onclick="openAuthModal()">Login / Register</div>
@@ -563,7 +561,7 @@
                 <div onclick='document.getElementById("tooltipTop").style.display = `none`
         document.getElementById("tooltipTitle").innerHTML = `Game Modifiers`
         document.getElementById("tooltipMid").style.display = `none`
-        document.getElementById("tooltipBottom").innerHTML = `<div id="tooltip-modifiers-list"><div style="pointer-events:none; background:#AD5957; color:white">Challenges</div> <div data-help="ModNuzloke"><span>Nuzloke Mode</span> <input type="checkbox" id="checkbox-mode-nuzloke" onclick="updateSettings(true)"></div>  <div data-help="ModHard"><span>Hard Mode</span> <input type="checkbox" id="checkbox-mode-hard" onclick="updateSettings(true)"></div> <div style="pointer-events:none; background:#57AD5D; color:white">Cheats</div>  <div data-help="ModNoIvs"><span>No IVs</span><input type="checkbox" id="checkbox-mode-ivs" onclick="updateSettings(true)"></div>  <div data-help="ModAfk"><span>Longer AFK</span><input type="checkbox" id="checkbox-mode-afk" onclick="updateSettings(true)"></div> </div>`
+        document.getElementById("tooltipBottom").innerHTML = `<div id="tooltip-modifiers-list"><div style="pointer-events:none; background:#AD5957; color:white">Challenges</div> <div data-help="ModNuzloke"><span>Nuzloke Mode</span> <input type="checkbox" id="checkbox-mode-nuzloke" onclick="updateSettings(true)"></div>  <div data-help="ModHard"><span>Hard Mode</span> <input type="checkbox" id="checkbox-mode-hard" onclick="updateSettings(true)"></div> <div style="pointer-events:none; background:#57AD5D; color:white">Cheats</div>  <div data-help="ModNoIvs"><span>No IVs</span><input type="checkbox" id="checkbox-mode-ivs" onclick="updateSettings(true)"></div>  <div data-help="ModAfk"><span>Longer AFK</span><input type="checkbox" id="checkbox-mode-afk" onclick="updateSettings(true)"></div> <div data-help="ModFasterAfk"><span>Faster Auto</span><input type="checkbox" id="checkbox-mode-faster-afk" onclick="updateSettings(true)"></div> </div>`
         openTooltip(); updateSettings()'>Game modifiers</div>
 
 
@@ -2003,13 +2001,15 @@
     <script src="scripts/decor.js"></script>
 
     <script src="scripts/save.js"></script>
+    <script src="scripts/auth.js"></script>
 
     <!-- Auth Modal -->
     <div id="auth-modal"
-        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center;">
+        style="display: flex; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 10000; justify-content: center; align-items: center;">
         <div
             style="background: #2c3e50; padding: 2rem; border-radius: 10px; color: white; width: 300px; text-align: center; border: 2px solid #34495e;">
             <h2 id="auth-modal-title">Login</h2>
+            <p style="font-size: 0.8rem; color: #bdc3c7; margin-bottom: 1rem;">Login to enable Cloud Saves.</p>
             <input type="text" id="auth-username" placeholder="Username"
                 style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; border-radius: 5px; border: none;">
             <input type="password" id="auth-password" placeholder="Password"
@@ -2023,7 +2023,9 @@
                 style="font-size: 0.8rem; color: #3498db; cursor: pointer; text-decoration: underline;">Need an account?
                 Register</div>
 
-            <div onclick="closeAuthModal()" style="margin-top: 1rem; cursor: pointer; color: #e74c3c;">Close</div>
+            <div onclick="playAsGuest()"
+                style="margin-top: 1rem; cursor: pointer; color: #95a5a6; font-size: 0.9rem; text-decoration: underline;">
+                Play as Guest (Offline)</div>
         </div>
     </div>
 </body>
